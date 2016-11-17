@@ -21,6 +21,8 @@ export default class Calendar extends React.Component {
 		monthsCount: 24,
 		onSelectionChange: () => {
 		},
+		onSelectedDatesChange: () => {
+		},
 
 		monthsLocale: ['January', 'February', 'March', 'April', 'May', 'June',
 			'July', 'August', 'September', 'October', 'November', 'December'],
@@ -62,6 +64,7 @@ export default class Calendar extends React.Component {
 		startFromMonday: PropTypes.bool,
 
 		onSelectionChange: PropTypes.func,
+		onSelectedDatesChange: PropTypes.func,
 
 		width: PropTypes.number,
 
@@ -219,6 +222,7 @@ export default class Calendar extends React.Component {
 		this.months = months;
 
 		this.props.onSelectionChange(value, this.prevValue);
+		this.props.onSelectedDatesChange(this.selectFrom, this.selectTo);
 		this.prevValue = value;
 
 		this.setState({
