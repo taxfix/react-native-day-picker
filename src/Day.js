@@ -10,7 +10,7 @@ import {
 export default class Day extends React.Component {
 	render() {
 		let {date, status, disabled, onDayPress, width} = this.props;
-		let onPress, textColor, backColor;
+		let onPress, textColor, backColor, style;
 
 		if (disabled) {
 			status = 'disabled';
@@ -25,28 +25,38 @@ export default class Day extends React.Component {
 			case 'disabled':
 				backColor = this.props.dayDisabledBackColor;
 				textColor = this.props.dayDisabledTextColor;
+				style = this.props.dayDisabledStyle;
 				break;
 
 			case 'common':
 				backColor = this.props.dayCommonBackColor;
 				textColor = this.props.dayCommonTextColor;
+				style = this.props.dayCommonStyle;
 				break;
 
-			case 'selected':
+			case 'selectedFrom':
 				backColor = this.props.daySelectedBackColor;
 				textColor = this.props.daySelectedTextColor;
+				style = this.props.daySelectedFromStyle;
+				break;
+
+			case 'selectedTo':
+				backColor = this.props.daySelectedBackColor;
+				textColor = this.props.daySelectedTextColor;
+				style = this.props.daySelectedToStyle;
 				break;
 
 			case 'inRange':
 				backColor = this.props.dayInRangeBackColor;
 				textColor = this.props.dayInRangeTextColor;
+				style = this.props.dayInRangeStyle;
 				break;
 		}
 
 		return (
 			<TouchableOpacity
 				activeOpacity={disabled ? 1 : 0.5}
-				style={[styles.common, {backgroundColor: backColor, width: width / 7, height: width / 7}]}
+				style={[styles.common, style, {backgroundColor: backColor, width: width / 7, height: width / 7}]}
 				onPress={onPress}>
 				<Text style={{color: textColor}}>{date.getDate()}</Text>
 			</TouchableOpacity>

@@ -10,6 +10,10 @@ import {
 
 import Month    from './Month';
 
+const StyleSheetPropType = PropTypes.oneOfType([
+	PropTypes.object,
+	PropTypes.number
+]);
 
 export default class Calendar extends React.Component {
 	static defaultProps = {
@@ -69,15 +73,20 @@ export default class Calendar extends React.Component {
 
 		dayCommonBackColor: PropTypes.string,
 		dayCommonTextColor: PropTypes.string,
+		dayCommonStyle: StyleSheetPropType,
 
 		dayDisabledBackColor: PropTypes.string,
 		dayDisabledTextColor: PropTypes.string,
+		dayDisabledStyle: StyleSheetPropType,
 
 		daySelectedBackColor: PropTypes.string,
 		daySelectedTextColor: PropTypes.string,
+		daySelectedFromStyle: StyleSheetPropType,
+		daySelectedToStyle: StyleSheetPropType,
 
 		dayInRangeBackColor: PropTypes.string,
 		dayInRangeTextColor: PropTypes.string,
+		dayInRangeStyle: StyleSheetPropType,
 
 		isFutureDate: PropTypes.bool,
 		rangeSelect: PropTypes.bool
@@ -220,12 +229,12 @@ export default class Calendar extends React.Component {
 	getStatus(date, selectFrom, selectTo) {
 		if (selectFrom) {
 			if (selectFrom.toDateString() === date.toDateString()) {
-				return 'selected';
+				return 'selectedFrom';
 			}
 		}
 		if (selectTo) {
 			if (selectTo.toDateString() === date.toDateString()) {
-				return 'selected';
+				return 'selectedTo';
 			}
 		}
 		if (selectFrom && selectTo) {
