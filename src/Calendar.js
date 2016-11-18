@@ -12,7 +12,8 @@ import Month    from './Month';
 
 const StyleSheetPropType = PropTypes.oneOfType([
 	PropTypes.object,
-	PropTypes.number
+	PropTypes.number,
+	PropTypes.array
 ]);
 
 export default class Calendar extends React.Component {
@@ -49,7 +50,8 @@ export default class Calendar extends React.Component {
 		dayInRangeTextColor: 'black',
 
 		isFutureDate: false,
-		rangeSelect: true
+		rangeSelect: true,
+		allowDaySelect: false
 	};
 
 	static propTypes = {
@@ -86,13 +88,15 @@ export default class Calendar extends React.Component {
 		daySelectedTextColor: PropTypes.string,
 		daySelectedFromStyle: StyleSheetPropType,
 		daySelectedToStyle: StyleSheetPropType,
+		daySelectedSingleStyle: StyleSheetPropType,
 
 		dayInRangeBackColor: PropTypes.string,
 		dayInRangeTextColor: PropTypes.string,
 		dayInRangeStyle: StyleSheetPropType,
 
 		isFutureDate: PropTypes.bool,
-		rangeSelect: PropTypes.bool
+		rangeSelect: PropTypes.bool,
+		allowDaySelect: PropTypes.bool
 	};
 
 	constructor(props) {
@@ -194,6 +198,11 @@ export default class Calendar extends React.Component {
 		} else if (!selectTo) {
 			if (value > selectFrom) {
 				selectTo = value;
+			} else if (
+				this.props.allowDaySelect &&
+				value.toDateString() === selectFrom.toDateString()
+			) {
+				selectTo = value;
 			} else {
 				selectFrom = value;
 			}
@@ -231,6 +240,12 @@ export default class Calendar extends React.Component {
 	}
 
 	getStatus(date, selectFrom, selectTo) {
+		if (selectFrom && selectTo) {
+			if (selectTo.toDateString() === selectFrom.toDateString() &&
+					selectFrom.toDateString() === date.toDateString()) {
+				return 'selectedSingleDay';
+			}
+		}
 		if (selectFrom) {
 			if (selectFrom.toDateString() === date.toDateString()) {
 				return 'selectedFrom';
