@@ -102,6 +102,8 @@ export default class Calendar extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.listViewRef = null;
+
 		this.changeSelection = this.changeSelection.bind(this);
 		this.generateMonths = this.generateMonths.bind(this);
 
@@ -115,6 +117,12 @@ export default class Calendar extends React.Component {
 
 		this.state = {
 			dataSource: dataSource.cloneWithRows(this.months)
+		}
+	}
+
+	scrollTo(params) {
+		if (this.listViewRef != null) {
+			this.listViewRef.scrollTo(params);
 		}
 	}
 
@@ -276,6 +284,7 @@ export default class Calendar extends React.Component {
 
 		return (
 			<ListView
+				ref={ref => this.listViewRef = ref}
 				initialListSize={5}
 				scrollRenderAheadDistance={1200}
 				style={[styles.listViewContainer, directionStyles, style]}
