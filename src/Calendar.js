@@ -47,7 +47,8 @@ export default class Calendar extends React.Component {
 		dayInRangeTextColor: 'black',
 
 		isFutureDate: false,
-		rangeSelect: true
+		rangeSelect: true,
+		allowDaySelect: false
 	};
 
 	static propTypes = {
@@ -89,7 +90,8 @@ export default class Calendar extends React.Component {
 		dayInRangeStyle: StyleSheetPropType,
 
 		isFutureDate: PropTypes.bool,
-		rangeSelect: PropTypes.bool
+		rangeSelect: PropTypes.bool,
+		allowDaySelect: PropTypes.bool
 	};
 
 	constructor(props) {
@@ -190,6 +192,11 @@ export default class Calendar extends React.Component {
 			selectFrom = value;
 		} else if (!selectTo) {
 			if (value > selectFrom) {
+				selectTo = value;
+			} else if (
+				this.props.allowDaySelect &&
+				value.toDateString() === selectFrom.toDateString()
+			) {
 				selectTo = value;
 			} else {
 				selectFrom = value;
