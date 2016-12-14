@@ -6,6 +6,7 @@ import React, {
 import {
 	ListView,
 	StyleSheet,
+	Text,
 }               from 'react-native';
 
 import Month    from './Month';
@@ -41,6 +42,8 @@ export default class Calendar extends React.Component {
 
 		dayInRangeBackColor: '#87cefa',
 		dayInRangeTextColor: 'black',
+
+		TextComponent: Text,
 
 		isFutureDate: false,
 		rangeSelect: true
