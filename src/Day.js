@@ -9,7 +9,7 @@ import {
 
 export default class Day extends React.Component {
 	render() {
-		let {date, status, disabled, onDayPress, width} = this.props;
+		let {date, status, disabled, onDayPress, width, TextComponent} = this.props;
 		let onPress, textColor, backColor, style;
 
 		if (disabled) {
@@ -64,7 +64,7 @@ export default class Day extends React.Component {
 				activeOpacity={disabled ? 1 : 0.5}
 				style={[styles.common, style, {backgroundColor: backColor, width: width / 7, height: width / 7}]}
 				onPress={onPress}>
-				<Text style={{color: textColor}}>{date.getDate()}</Text>
+				<TextComponent style={{color: textColor}}>{date.getDate()}</TextComponent>
 			</TouchableOpacity>
 		);
 	}
