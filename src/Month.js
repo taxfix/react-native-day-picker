@@ -6,7 +6,8 @@ import {
 	StyleSheet,
 	Text
 }               from 'react-native';
-import Day      from './Day'
+import Day      from './Day';
+import { testID } from '../../../src/common/testID';
 
 export default class Month extends React.Component {
 	constructor(props) {
@@ -29,7 +30,7 @@ export default class Month extends React.Component {
 		var monthHeader = monthsLocale[days[15].date.getMonth()] + ' ' + days[15].date.getFullYear();
 
 		return (
-			<View style={[style, {width: width, backgroundColor: bodyBackColor}]}>
+			<View style={[style, {width: width, backgroundColor: bodyBackColor}]} {...testID(monthHeader)}>
 				<TextComponent style={[styles.monthHeader, {color: monthTextColor || bodyTextColor}]}>
 					{monthHeader}
 				</TextComponent>
@@ -57,6 +58,7 @@ export default class Month extends React.Component {
 								status={day.status}
 								date={day.date}
 								onDayPress={changeSelection}
+								testId={`${day.date.getDate()}`}
 							/>
 						);
 					})}
