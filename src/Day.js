@@ -10,7 +10,7 @@ import { testID } from '../../../src/common/testID';
 
 export default class Day extends React.Component {
 	render() {
-		let {date, status, disabled, onDayPress, width, TextComponent} = this.props;
+		let {date, status, disabled, onDayPress, width, TextComponent, testId} = this.props;
 		let onPress, textColor, backColor, style;
 
 		if (disabled) {
