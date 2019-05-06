@@ -9,6 +9,7 @@ import {
 import PropTypes from 'prop-types';
 
 import Month    from './Month';
+import { testID } from '../../../src/common/testID';
 
 const StyleSheetPropType = PropTypes.oneOfType([
 	PropTypes.object,
@@ -291,6 +292,7 @@ export default class Calendar extends React.Component {
 				scrollRenderAheadDistance={1200}
 				style={[styles.listViewContainer, directionStyles, style]}
 				dataSource={this.state.dataSource}
+				{...testID('test.scroll')}
 				renderRow={(month) => {
 					return (
 						<Month
